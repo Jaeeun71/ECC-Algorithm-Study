@@ -1,0 +1,21 @@
+def solution(people, limit):
+    people.sort()
+    
+    left = 0
+    right = len(people) - 1
+    boats = 0
+    
+    while left <= right:
+        if left == right:
+            boats += 1
+            break
+            
+        if people[left] + people[right] <= limit:
+            left += 1   # 가벼운 사람 탑승
+            right -= 1  # 무거운 사람 탑승
+        else:
+            right -= 1  # 무거운 사람만 혼자 탑승
+            
+        boats += 1      # 보트 개수 추가
+        
+    return boats
