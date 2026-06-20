@@ -1,0 +1,23 @@
+def solution(N, number):
+    if N == number:
+        return 1
+    
+    S = [set() for _ in range(9)]
+    
+    for i in range(1, 9):
+        S[i].add(int(str(N) * i))
+        
+    for k in range(2, 9):
+        for i in range(1, k):
+            for op1 in S[i]:
+                for op2 in S[k-i]:
+                    S[k].add(op1 + op2)
+                    S[k].add(op1 - op2)
+                    S[k].add(op1 * op2)
+                    if op2 != 0: 
+                        S[k].add(op1 // op2)
+                        
+        if number in S[k]:
+            return k
+            
+    return -1
