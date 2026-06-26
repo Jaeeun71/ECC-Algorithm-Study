@@ -1,0 +1,23 @@
+from collections import defaultdict
+
+def solution(tickets):
+    graph = defaultdict(list)
+    for start, end in tickets:
+        graph[start].append(end)
+        
+    for start in graph:
+        graph[start].sort(reverse=True)
+        
+    stack = ["ICN"] 
+    path = []        
+    
+    while stack:
+        current = stack[-1] 
+        
+        if graph[current]:
+            next_airport = graph[current].pop()
+            stack.append(next_airport)
+        else:
+            path.append(stack.pop())
+            
+    return path[::-1]
